@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Table({
-    media = []
+    medias = []
 }) {
   return (
     <table className="table">
@@ -15,8 +15,8 @@ export default function Table({
   </thead>
   <tbody>
   {
-      media.map((media, index)=> {
-        const {titulo, sipnosis} = media
+      medias.map((medias, index)=> {
+        const {titulo, sipnosis} = medias
         return(
           <tr> 
             <th scope="row">{index+1}</th>
@@ -27,7 +27,7 @@ export default function Table({
               <button 
                 type="button" 
                 className="btn btn-danger"
-                id={media._id}
+                id={medias._id}
                 // onClick={borrarPorId}
               >
                 Delete

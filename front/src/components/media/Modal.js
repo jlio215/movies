@@ -1,6 +1,24 @@
 import React from 'react'
 
-export default function Modal() {
+export default function Modal({
+  media,
+  change,
+  guardar,
+  clearForm
+}) {
+  const handleChange = e => {
+    change(e)
+  }
+
+  const saveMedia = (e) => {
+    e.preventDefault()
+    guardar()
+    clear()
+  }
+
+  const clear = () => {
+    clearForm()
+  }
   return (
     <>
     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Create Movie</button>
@@ -10,47 +28,51 @@ export default function Modal() {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="exampleModalLabel">New Movie</h1>
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" onClick={clear} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <form>
+            <form onSubmit={saveMedia}>
+            <div className="mb-3">
+                <label for="recipient-name" className="col-form-label">Title:</label>
+                <input name='titulo' value={media.titulo} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
+              </div>
               <div className="mb-3">
                 <label for="recipient-name" className="col-form-label">Director:</label>
-                <input type="text" className="form-control" id="recipient-name"></input>
+                <input name='director' value={media.director} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
               </div>
               <div className="mb-3">
                 <label for="recipient-name" className="col-form-label">Gender:</label>
-                <input type="text" className="form-control" id="recipient-name"></input>
+                <input name='genero' value={media.genero} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
+              </div>
+              <div className="mb-3">
+                <label for="recipient-name" className="col-form-label">Productors:</label>
+                <input name='productora' value={media.productora} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
               </div>
               <div className="mb-3">
                 <label for="recipient-name" className="col-form-label">Picture:</label>
-                <input type="text" className="form-control" id="recipient-name"></input>
+                <input name='imagen' value={media.imagen} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
               </div>
               <div className="mb-3">
                 <label for="recipient-name" className="col-form-label">Serial:</label>
-                <input type="text" className="form-control" id="recipient-name"></input>
+                <input name='serial' value={media.serial} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
               </div>
               <div className="mb-3">
-                <label for="recipient-name" className="col-form-label">Sipnosis:</label>
-                <input type="text" className="form-control" id="recipient-name"></input>
+                <label for="recipient-name" className="col-form-label">Sypnosis:</label>
+                <input name='sipnosis' value={media.sipnosis} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
               </div>
               <div className="mb-3">
                 <label for="recipient-name" className="col-form-label">Type:</label>
-                <input type="text" className="form-control" id="recipient-name"></input>
-              </div>
-              <div className="mb-3">
-                <label for="recipient-name" className="col-form-label">Title:</label>
-                <input type="text" className="form-control" id="recipient-name"></input>
+                <input name='tipo' value={media.tipo} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
               </div>
               <div className="mb-3">
                 <label for="recipient-name" className="col-form-label">Url:</label>
-                <input type="text" className="form-control" id="recipient-name"></input>
+                <input name='url' value={media.url} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
               </div>
-            </form>
+              <div className="modal-footer">
+            <button type="button" onClick={clear} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" className="btn btn-primary">Add Movie</button>
           </div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" className="btn btn-primary">Add Movie</button>
+            </form>
           </div>
         </div>
       </div>
