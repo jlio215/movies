@@ -19,6 +19,18 @@ export default function Media() {
       url : '',
 })
 
+const [mediaE, setMediaE] = useState({
+  titulo : '',
+  director : '',
+  genero : '',
+  productora : '',
+  imagen : '',
+  serial : '',
+  sipnosis : '',
+  tipo : '',
+  url : '',
+})
+
   useEffect(() => {
     listarMedia();
   }, [])
@@ -51,10 +63,10 @@ export default function Media() {
     return tipoId
   }
 
-  const editar = async(id, media) => {
+  const editar = async(id) => {
     try {
-        const response = await editarMedia(id, media)
-        console.log("hola soy response"+response)
+        const response = await editarMedia(id, mediaE)
+        console.log(response)
         listarMedia()
     } catch (e) {
         console.log(e)
@@ -67,6 +79,15 @@ export default function Media() {
       ...media,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleChangeEdit = e => {
+    // console.log(e.target.name)
+    setMediaE({
+      ...mediaE,
+      [e.target.name]: e.target.value
+    })
+    console.log(mediaE)
   }
 
   const clearForm = () => {
@@ -102,8 +123,8 @@ export default function Media() {
          medias={medias} 
          borrarMediaPorId={borrarMediaPorId}
          clear= {clearForm}
-         media = {media}
-         change={handleChange}
+         media = {mediaE}
+         change1={handleChangeEdit}
          editar={editar}
          extId = {extId}
         //  id={tipoId}

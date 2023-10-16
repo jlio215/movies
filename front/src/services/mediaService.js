@@ -27,7 +27,7 @@ const editarMedia = (tipoId, data) => {
 }
 
 // borrar Media
-const borrarMedia = (tipoId, data) => {
+const borrarMedia = (tipoId) => {
   return axiosConfiguration.delete('media/'+tipoId, {}, {
   headers: {
     'Content-Type': 'application/json'

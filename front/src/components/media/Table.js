@@ -6,21 +6,21 @@ export default function Table({
     borrarMediaPorId,
     editar,
     media,
-    change,
+    change1,
     clear,
     extId
 }) {
 
   const borrarPorId = (e) => {
-    // e.prevenDefault()
+    // e.preventDefault()
     borrarMediaPorId(e)
   }
 
   const extIduno = async(e) => {
     const id = await extId(e) 
-    var boton = document.getElementById('botonuno')
-    boton.addEventListener('click', function a() {
-      console.log('entre')
+    var form = document.getElementById('botonuno')
+    form.addEventListener('submit', function a(e) {
+      e.preventDefault()
       editar(id, media)
       clear()
       
@@ -28,7 +28,7 @@ export default function Table({
   }
 
   const handleChange = e => {
-    change(e)
+    change1(e)
   }
 
   return (
@@ -65,7 +65,7 @@ export default function Table({
             <button type="button" onClick={clear} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <form >
+            <form  id='botonuno'>
             <div className="mb-3">
                 <label for="recipient-name" className="col-form-label">Title:</label>
                 <input name='titulo' value={media.titulo} onChange={handleChange} type="text" className="form-control" id="recipient-name"></input>
@@ -104,7 +104,7 @@ export default function Table({
               </div>
               <div className="modal-footer">
             <button type="button" onClick={clear} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" id='botonuno' className="btn btn-primary">Edit Movie</button>
+            <button type="submit"  className="btn btn-primary">Edit Movie</button>
           </div>
             </form>
           </div>
