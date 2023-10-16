@@ -1,5 +1,5 @@
 import React from 'react'
-import { borrarMedia, editarMedia, obtenerMedia } from '../../services/mediaService'
+import { borrarMedia, editarMedia,  obtenerMedia } from '../../services/mediaService'
 import { useEffect, useState } from 'react';
 import Modal from './Modal'
 import Table from './Table';
@@ -45,12 +45,16 @@ export default function Media() {
     }
   }
 
-  const editar = async (e) => {
+  const extId =  (e) => {
     const tipoId = e.target.id
     console.log(tipoId)
+    return tipoId
+  }
+
+  const editar = async(id, media) => {
     try {
-        const response = await editarMedia(tipoId, media)
-        console.log(response)
+        const response = await editarMedia(id, media)
+        console.log("hola soy response"+response)
         listarMedia()
     } catch (e) {
         console.log(e)
@@ -97,13 +101,15 @@ export default function Media() {
         <Table 
          medias={medias} 
          borrarMediaPorId={borrarMediaPorId}
-         clearForm= {clearForm}
+         clear= {clearForm}
          media = {media}
-         editar={editar}
          change={handleChange}
+         editar={editar}
+         extId = {extId}
         //  id={tipoId}
          />
         <Modal
+        editar = {editar}
         media = {media}
         change = {handleChange}
         guardar = {guardar}
