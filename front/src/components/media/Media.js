@@ -1,5 +1,5 @@
 import React from 'react'
-import { obtenerMedia } from '../../services/mediaService'
+import { borrarMedia, editarMedia, obtenerMedia } from '../../services/mediaService'
 import { useEffect, useState } from 'react';
 import Modal from './Modal'
 import Table from './Table';
@@ -45,6 +45,18 @@ export default function Media() {
     }
   }
 
+  const editar = async (e) => {
+    const tipoId = e.target.id
+    console.log(tipoId)
+    try {
+        const response = await editarMedia(tipoId, media)
+        console.log(response)
+        listarMedia()
+    } catch (e) {
+        console.log(e)
+    }
+  }
+
   const handleChange = e => {
     // console.log(e.target.name)
     setMedia({
@@ -67,10 +79,29 @@ export default function Media() {
     })
   }
 
+  const borrarMediaPorId = async (e) => {
+    const id = e.target.id
+        try {
+          const response = await borrarMedia(id)
+          console.log(response)
+          listarMedia()
+      } catch (e) {
+          console.log(e)
+      }
+
+  }
+  
+
   return (
     <>
         <Table 
          medias={medias} 
+         borrarMediaPorId={borrarMediaPorId}
+         clearForm= {clearForm}
+         media = {media}
+         editar={editar}
+         change={handleChange}
+        //  id={tipoId}
          />
         <Modal
         media = {media}
